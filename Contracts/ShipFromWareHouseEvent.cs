@@ -1,16 +1,20 @@
 ﻿namespace Contracts
 {
     using System;
+    using System.Collections.Generic;
+    using System.Management.Instrumentation;
     using System.Threading.Tasks;
+
+    using Newtonsoft.Json.Linq;
 
     public class ShipFromWareHouseEvent : DomainEvent
     {
         public ShipFromWareHouseEvent(
-
             DateTime occurred,
             Product product,
             Warehouse warehouse,
-            Customer customer, string correlationId = "")
+            Customer customer,
+            string correlationId = "")
             : base(correlationId, occurred)
         {
             this.Product = product;
@@ -24,11 +28,16 @@
 
         public Warehouse Warehouse { get; set; }
 
-        public override Task Process()
+        public override async Task<JObject> Process()
         {
-            var product = this.Product.GetProductByName(Product.Name);
-            this.Id = product.
-            return this.Warehouse.Ship(this.Product, this.Customer);
+            var shippedItemCode = this.Warehouse.Ship(this.Product, this.Customer);
+            if (shippedItemCode.Result == string.Empty)
+            {
+                this.Id = shippedItemCode.Result;
+                return JObject.FromObject(new { this.Id });
+            }
+
+            throw new KeyNotFoundException(this.Product.Name);
         }
     }
 }

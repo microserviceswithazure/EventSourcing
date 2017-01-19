@@ -15,10 +15,10 @@ namespace Contracts
         {
         }
 
-        public Task Receive(Product product, Warehouse warehouse)
+        public Task Receive(Product product)
         {
             var receipts = this.CacheProxy.Get<List<Receipt>>("receipts") ?? new List<Receipt>();
-            receipts.Add(new Receipt { Product = product, Warehouse = warehouse });
+            receipts.Add(new Receipt { Product = product, Customer = this });
             this.CacheProxy.Set("receipts", receipts);
             return Task.FromResult(1);
         }

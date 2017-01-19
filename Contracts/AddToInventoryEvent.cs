@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
+    using Newtonsoft.Json.Linq;
+
     public class AddToInventoryEvent : DomainEvent
     {
         public AddToInventoryEvent(string correlationId, DateTime occurred, Product product, Warehouse warehouse)
@@ -16,9 +18,10 @@
 
         public Warehouse Warehouse { get; set; }
 
-        public override async Task Process()
+        public override async Task<JObject> Process()
         {
             await this.Warehouse.AddToInventory(this.Product);
+            return JObject.FromObject(1);
         }
     }
 }

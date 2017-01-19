@@ -12,6 +12,6 @@ namespace Contracts
     {
         public Product Product { get; set; }
 
-        public Warehouse Warehouse { get; set; }
+        public Customer Customer { get; set; }
     }
 }

@@ -8,22 +8,24 @@ namespace Contracts
 {
     using System.Net.Sockets;
 
+    using Newtonsoft.Json.Linq;
+
     public class DeliveredToCustomerEvent : DomainEvent
     {
-        public Warehouse Warehouse { get; set; }
-        private Customer Customer { get; set; }
+        public Customer Customer { get; set; }
 
         public Product Product { get; set; }
 
-        public DeliveredToCustomerEvent(string correlationId, DateTime occurred)
-            : base(correlationId, occurred)
+        public DeliveredToCustomerEvent(Product product, Customer customer, DateTime occurred) : base(product.Id, occurred)
         {
-
+            this.Product = product;
+            this.Customer = customer;
         }
 
-        public override Task Process()
+        public override async Task<JObject> Process()
         {
-            return Customer.Receive(Product, Warehouse);
+            Customer.Receive(Product);
+            return JObject.FromObject(1);
         }
     }
 }

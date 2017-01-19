@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
+    using Newtonsoft.Json.Linq;
+
     public abstract class DomainEvent
     {
         DateTime recorded, occurred;
@@ -15,6 +17,6 @@
 
         public string Id { get; set; }
 
-        public abstract Task Process();
+        public abstract Task<JObject> Process();
     }
 }
