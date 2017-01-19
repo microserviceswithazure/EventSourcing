@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Contracts
+﻿namespace Contracts
 {
-    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     using Redis;
 
@@ -21,14 +17,16 @@ namespace Contracts
 
         public Task AddToInventory(Product product)
         {
-            var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory") ?? new List<Product>();
+            var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory")
+                ?? new List<Product>();
             inventory.Add(product);
             return Task.FromResult(1);
         }
 
         public Task<string> Ship(Product product, Customer customer)
         {
-            var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory") ?? new List<Product>();
+            var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory")
+                ?? new List<Product>();
             var selectedProduct = inventory.FirstOrDefault(p => p.Name == product.Name);
             if (selectedProduct != null)
             {

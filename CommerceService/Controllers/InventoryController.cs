@@ -18,7 +18,12 @@
         {
             try
             {
-                var product = new Product(this.CacheProxy) { Id = productId, Name = productName, Supplier = supplierName };
+                var product = new Product(this.CacheProxy)
+                    {
+                        Id = productId,
+                        Name = productName,
+                        Supplier = supplierName
+                    };
                 var wareHouse = new Warehouse(this.CacheProxy) { Name = warehouseCode };
                 await this.EventProcessor.Process(
                     new AddToInventoryEvent(productId, DateTime.UtcNow, product, wareHouse));

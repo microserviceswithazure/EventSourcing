@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EventManager
+﻿namespace EventManager
 {
     using NEventStore;
     using NEventStore.Persistence.Sql.SqlDialects;
@@ -13,13 +7,14 @@ namespace EventManager
     {
         internal static IStoreEvents InitEventStore(string connectionString)
         {
-            return Wireup.Init()
-                         .UsingSqlPersistence("EMConnection", "System.Data.SqlClient", connectionString)
-                         .WithDialect(new MsSqlDialect())
-                         .EnlistInAmbientTransaction()
-                         .InitializeStorageEngine()
-                         .UsingJsonSerialization()
-                         .Build();
+            return
+                Wireup.Init()
+                    .UsingSqlPersistence("EMConnection", "System.Data.SqlClient", connectionString)
+                    .WithDialect(new MsSqlDialect())
+                    .EnlistInAmbientTransaction()
+                    .InitializeStorageEngine()
+                    .UsingJsonSerialization()
+                    .Build();
         }
     }
 }

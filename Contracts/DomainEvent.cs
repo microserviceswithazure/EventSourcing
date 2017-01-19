@@ -8,6 +8,7 @@
     public abstract class DomainEvent
     {
         DateTime recorded, occurred;
+
         internal DomainEvent(string correlationId, DateTime occurred)
         {
             this.Id = correlationId;

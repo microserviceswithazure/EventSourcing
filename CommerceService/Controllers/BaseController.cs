@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CommerceService.Controllers
+﻿namespace CommerceService.Controllers
 {
     using System.Web.Http;
 
@@ -12,7 +6,7 @@ namespace CommerceService.Controllers
 
     using Redis;
 
-    public class BaseController:ApiController
+    public class BaseController : ApiController
     {
         protected readonly CacheProxy CacheProxy;
 

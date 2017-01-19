@@ -16,8 +16,7 @@
             {
                 var product = new Product(this.CacheProxy) { Id = productId };
                 var customer = new Customer(this.CacheProxy) { Name = customerName };
-                await this.EventProcessor.Process(
-                    new DeliveredToCustomerEvent(product, customer, DateTime.UtcNow));
+                await this.EventProcessor.Process(new DeliveredToCustomerEvent(product, customer, DateTime.UtcNow));
                 return this.Request.CreateResponse(HttpStatusCode.OK, "delivered");
             }
             catch (Exception e)

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Management.Instrumentation;
     using System.Threading.Tasks;
 
     using Newtonsoft.Json.Linq;
