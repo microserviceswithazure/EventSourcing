@@ -21,7 +21,9 @@
         public override async Task<JObject> Process()
         {
             await this.Warehouse.AddToInventory(this.Product);
-            return JObject.FromObject(1);
+            return JObject.FromObject(new { Result = 1 });
         }
+
+        public override string Message => "Add product to warehouse inventory";
     }
 }

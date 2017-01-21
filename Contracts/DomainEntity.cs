@@ -12,5 +12,10 @@
         }
 
         public CacheProxy CacheProxy { get; set; }
+
+        public bool ShouldSerializeCacheProxy()
+        {
+            return false;
+        }
     }
 }

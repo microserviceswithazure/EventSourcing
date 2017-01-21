@@ -12,7 +12,8 @@
         {
             try
             {
-                return this.Request.CreateResponse(HttpStatusCode.OK, "done");
+                var result = this.EventProcessor.ReadStream(correlationCode);
+                return this.Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception e)
             {

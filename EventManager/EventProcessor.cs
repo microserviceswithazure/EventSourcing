@@ -1,11 +1,14 @@
 ﻿namespace EventManager
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Transactions;
 
     using Contracts;
 
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     using NEventStore;
@@ -27,9 +30,10 @@
                 using (var store = Initializtion.InitEventStore(this.connectionString))
                 {
                     result = await @event.Process();
-                    using (var stream = store.OpenStream(@event.Id, 0))
+                    var streamId = @event.Id;
+                    using (var stream = store.OpenStream(streamId, 0))
                     {
-                        stream.Add(new EventMessage { Body = @event });
+                        stream.Add(new EventMessage { Body = JsonConvert.SerializeObject(@event) });
                         stream.CommitChanges(Guid.NewGuid());
                     }
                 }
@@ -38,6 +42,20 @@
             }
 
             return result;
+        }
+
+        public string ReadStream(string streamId)
+        {
+            var resolvedEvents = new List<EventMessage>();
+            using (var store = Initializtion.InitEventStore(this.connectionString))
+            {
+                using (var stream = store.OpenStream(streamId, 0))
+                {
+                    resolvedEvents = stream.CommittedEvents.ToList();
+                }
+            }
+
+            return JsonConvert.SerializeObject(resolvedEvents);
         }
     }
 }

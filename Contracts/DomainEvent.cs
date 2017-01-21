@@ -19,5 +19,7 @@
         public string Id { get; set; }
 
         public abstract Task<JObject> Process();
+
+        public abstract string Message { get; }
     }
 }

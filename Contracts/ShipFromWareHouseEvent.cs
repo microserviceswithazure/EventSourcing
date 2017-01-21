@@ -30,7 +30,7 @@
         public override async Task<JObject> Process()
         {
             var shippedItemCode = this.Warehouse.Ship(this.Product, this.Customer);
-            if (shippedItemCode.Result == string.Empty)
+            if (shippedItemCode.Result != string.Empty)
             {
                 this.Id = shippedItemCode.Result;
                 return JObject.FromObject(new { this.Id });
@@ -38,5 +38,7 @@
 
             throw new KeyNotFoundException(this.Product.Name);
         }
+
+        public override string Message => "Shipped from warehouse";
     }
 }

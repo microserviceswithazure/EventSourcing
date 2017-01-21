@@ -2,6 +2,6 @@
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Section Name="ApplicationSettings">
     <Parameter Name="ESConnectionString" Value="Data Source=rahul-pc;Initial Catalog=EventStore;User ID=sa;Password=Sql@123" />
-    <Parameter Name="RedisConnectionString" Value="ignitedemo.redis.cache.windows.net:6380,password=SKrVlOLIS9RJSy3sGz7yovQh0ZiP1BLTT7DkwLv/nlI=,ssl=True,abortConnect=False"/>
+    <Parameter Name="RedisConnectionString" Value="igniteau.redis.cache.windows.net:6380,password=R2hTj51gd3H27RGDzZuAJgFoxf9/En4HdMzqdMc87TM=,ssl=True,abortConnect=False"/>
   </Section>
 </Settings>

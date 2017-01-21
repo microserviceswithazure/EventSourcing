@@ -20,8 +20,10 @@
 
         public override async Task<JObject> Process()
         {
-            this.Customer.Receive(this.Product);
-            return JObject.FromObject(1);
+            await this.Customer.Receive(this.Product);
+            return JObject.FromObject(new { Result = 1 });
         }
+
+        public override string Message => "Delivered to customer";
     }
 }

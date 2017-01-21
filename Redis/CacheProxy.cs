@@ -1,10 +1,12 @@
 ﻿namespace Redis
 {
+    using System;
+
     using Newtonsoft.Json;
 
     using StackExchange.Redis;
 
-    public class CacheProxy
+    public sealed class CacheProxy
     {
         private readonly ConnectionMultiplexer connection;
 
@@ -16,7 +18,7 @@
         public T Get<T>(string key)
         {
             var cache = this.connection.GetDatabase();
-            var data = cache.StringGet(key);
+            string data = cache.StringGet(key);
             return string.IsNullOrEmpty(data) ? default(T) : JsonConvert.DeserializeObject<T>(data);
         }
 

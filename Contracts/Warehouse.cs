@@ -1,5 +1,6 @@
 ﻿namespace Contracts
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -20,6 +21,7 @@
             var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory")
                 ?? new List<Product>();
             inventory.Add(product);
+            this.CacheProxy.Set($"{this.Name.ToLowerInvariant()}-inventory", inventory);
             return Task.FromResult(1);
         }
 
@@ -27,11 +29,24 @@
         {
             var inventory = this.CacheProxy.Get<List<Product>>($"{this.Name.ToLowerInvariant()}-inventory")
                 ?? new List<Product>();
-            var selectedProduct = inventory.FirstOrDefault(p => p.Name == product.Name);
-            if (selectedProduct != null)
+            var selectedProduct = inventory.Any(p => p.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase));
+            if (selectedProduct)
             {
-                inventory.Remove(product);
-                return Task.FromResult(selectedProduct.Id);
+                var productId = string.Empty;
+                foreach (var inventoryProduct in inventory)
+                {
+                    if (!inventoryProduct.Name.Equals(product.Name, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    productId = inventoryProduct.Id;
+                    inventory.Remove(inventoryProduct);
+                    break;
+                }
+
+                this.CacheProxy.Set($"{this.Name.ToLowerInvariant()}-inventory", inventory);
+                return Task.FromResult(productId);
             }
 
             return Task.FromResult(string.Empty);
