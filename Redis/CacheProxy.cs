@@ -10,6 +10,11 @@
     {
         private readonly ConnectionMultiplexer connection;
 
+        public CacheProxy()
+        {
+            
+        }
+
         public CacheProxy(string connectionString)
         {
             this.connection = ConnectionMultiplexer.Connect(connectionString);

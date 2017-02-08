@@ -5,9 +5,9 @@
 
     using Newtonsoft.Json.Linq;
 
-    public class DeliveredToCustomerEvent : DomainEvent
+    public class DeliveryToCustomerFailedEvent : DomainEvent
     {
-        public DeliveredToCustomerEvent(Product product, Customer customer, DateTime occurred)
+        public DeliveryToCustomerFailedEvent(Product product, Customer customer, DateTime occurred)
             : base(product.Id, occurred)
         {
             this.Product = product;
@@ -24,6 +24,6 @@
             return JObject.FromObject(new { Result = 1 });
         }
 
-        public override string Message => $"{DateTime.UtcNow:G}: Delivered to customer";
+        public override string Message => $"{DateTime.UtcNow:G}: Delivery to customer failed";
     }
 }

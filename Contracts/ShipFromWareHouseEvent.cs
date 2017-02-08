@@ -39,6 +39,6 @@
             throw new KeyNotFoundException(this.Product.Name);
         }
 
-        public override string Message => "Shipped from warehouse";
+        public override string Message => $"{DateTime.UtcNow:G}: Shipped from warehouse";
     }
 }

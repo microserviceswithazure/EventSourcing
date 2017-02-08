@@ -24,6 +24,6 @@
             return JObject.FromObject(new { Result = 1 });
         }
 
-        public override string Message => "Add product to warehouse inventory";
+        public override string Message => $"{DateTime.UtcNow:G}: Add product to warehouse inventory";
     }
 }
