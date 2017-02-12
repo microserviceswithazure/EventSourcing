@@ -44,18 +44,23 @@
             return result;
         }
 
-        public string ReadStream(string streamId)
+        public List<string> ReadStream(string streamId)
         {
+            var response = new List<string>();
             var resolvedEvents = new List<EventMessage>();
             using (var store = Initializtion.InitEventStore(this.connectionString))
             {
                 using (var stream = store.OpenStream(streamId, 0))
                 {
                     resolvedEvents = stream.CommittedEvents.ToList();
+                    foreach (var @event in resolvedEvents)
+                    {
+                        response.Add(JObject.Parse(@event.Body.ToString()).Property("Message").Value.ToString());
+                    }
                 }
             }
 
-            return JsonConvert.SerializeObject(resolvedEvents);
+            return response;
         }
     }
 }
