@@ -13,6 +13,9 @@ namespace Client
     using System.Configuration;
 
     using RestSharp;
+    using Newtonsoft.Json;
+    using NEventStore;
+    using Contracts;
 
     public partial class Lifecycle : Form
     {
@@ -24,37 +27,54 @@ namespace Client
 
         private void btn_AddToInventory_Click(object sender, EventArgs e)
         {
-            var request = new RestRequest($"/Inventory?productId={1}&productName={"something"}&supplierName={"supplier"}&warehouseCode={"delhi"}", Method.POST);
+            var request = new RestRequest($"/Inventory?productId={txtProd.Text}&productName={txtProdName.Text}&supplierName={txtSup.Text}&warehouseCode={txtCode.Text}", Method.POST);
             IRestResponse response = client.Execute(request);
+            lblProductID.Visible = true;
+            lblProductName.Visible = true;
+            lblStatus.Visible = true;
+
             var content = response.Content;
+
+            lblProductID.Text = txtProd.Text;
+            lblProductName.Text = txtProdName.Text;
+            lblStatus.Text = "Added";
         }
 
         private void btn_ShipToCustomer_Click(object sender, EventArgs e)
         {
-            var request = new RestRequest($"Shipping?productName={"stuff"}&warehouseName={"delhi"}&customerName={"rahul"}", Method.POST);
+            var request = new RestRequest($"Shipping?productName={txtProdName.Text}&warehouseName={txtCode.Text}&customerName={txtCusName.Text}", Method.POST);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
+            lblStatus.Text = "Shipped";
         }
 
         private void btn_DeliveredToCustomer_Click(object sender, EventArgs e)
         {
-            var request = new RestRequest($"Customer?productId={1}&customerName={"rahul"}", Method.POST);
+            var request = new RestRequest($"Customer?productId={txtProd.Text}&customerName={txtCusName.Text}", Method.POST);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
+            lblStatus.Text = "Delivered";
         }
 
         private void btn_ReshipToCustomer_Click(object sender, EventArgs e)
         {
-            var request = new RestRequest($"Customer?productId={1}&customerName={"rahul"}", Method.PUT);
+            var request = new RestRequest($"Customer?productId={txtProd.Text}&customerName={txtCusName.Text}", Method.PUT);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
+            lblStatus.Text = "Reshipped";
         }
 
         private void btn_AuditLifecycle_Click(object sender, EventArgs e)
         {
-            var request = new RestRequest($"Audit?correlationCode={1}", Method.GET);
+            var request = new RestRequest($"Audit?correlationCode={txtProd.Text}", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
+            var events = JsonConvert.DeserializeObject<List<string>>(content);
+            foreach(var eve in events)
+            {
+                txtAuditLog.Text+= eve;
+                txtAuditLog.Text += Environment.NewLine;
+            }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -78,6 +98,16 @@ namespace Client
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
         }
