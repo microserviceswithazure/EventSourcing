@@ -60,6 +60,9 @@
             this.lblProductID = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -198,7 +201,6 @@
             this.txtAuditLog.Name = "txtAuditLog";
             this.txtAuditLog.Size = new System.Drawing.Size(463, 683);
             this.txtAuditLog.TabIndex = 16;
-            this.txtAuditLog.Text = "Ship Product";
             // 
             // label9
             // 
@@ -305,6 +307,9 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label13);
+            this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.lblStatus);
             this.panel1.Controls.Add(this.lblProductName);
             this.panel1.Controls.Add(this.lblProductID);
@@ -413,6 +418,7 @@
             this.lblProductID.Size = new System.Drawing.Size(94, 34);
             this.lblProductID.TabIndex = 22;
             this.lblProductID.Text = "name";
+            this.lblProductID.Visible = false;
             // 
             // lblProductName
             // 
@@ -425,6 +431,7 @@
             this.lblProductName.Size = new System.Drawing.Size(94, 34);
             this.lblProductName.TabIndex = 23;
             this.lblProductName.Text = "name";
+            this.lblProductName.Visible = false;
             // 
             // lblStatus
             // 
@@ -437,6 +444,43 @@
             this.lblStatus.Size = new System.Drawing.Size(94, 34);
             this.lblStatus.TabIndex = 24;
             this.lblStatus.Text = "name";
+            this.lblStatus.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(637, 75);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 34);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Status";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(442, 75);
+            this.label13.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(97, 34);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "Name";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Verdana", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label14.Location = new System.Drawing.Point(266, 75);
+            this.label14.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 34);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "ID";
             // 
             // Lifecycle
             // 
@@ -506,5 +550,8 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.Label lblProductID;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }

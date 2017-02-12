@@ -66,6 +66,7 @@ namespace Client
 
         private void btn_AuditLifecycle_Click(object sender, EventArgs e)
         {
+            txtAuditLog.Text = "";
             var request = new RestRequest($"Audit?correlationCode={txtProd.Text}", Method.GET);
             IRestResponse response = client.Execute(request);
             var content = response.Content;
@@ -73,6 +74,7 @@ namespace Client
             foreach(var eve in events)
             {
                 txtAuditLog.Text+= eve;
+                txtAuditLog.Text += Environment.NewLine;
                 txtAuditLog.Text += Environment.NewLine;
             }
         }
